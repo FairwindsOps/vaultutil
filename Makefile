@@ -5,8 +5,6 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 
 all: lint test
-build:
-	$(GOBUILD) -v
 lint:
 	golangci-lint run
 reportcard:
@@ -21,4 +19,3 @@ tidy:
 clean:
 	$(GOCLEAN)
 	$(GOCMD) fmt ./...
-	rm -f $(BINARY_NAME)
