@@ -12,7 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License
 
-// Pacakge vaultutil is a go library that provides functions and helpers for working
-// with vault-provided cloud credentials
-
+// Package vaultutil is a go library that provides functions and helpers for working
+// with vault-provided cloud credentials.
+//
+// Example of Getting AWS Credentials:
+//  import (
+//      "fmt"
+//      "os"
+//
+//      "github.com/fairwindsops/vaultutil"
+//  )
+//
+//  func main() {
+//      c := vaultutil.NewConfig("aws", "admin", "aws-account", 120)
+//      creds, err := c.AWSLogin()
+//      if err != nil {
+//         fmt.Println(err)
+//         os.Exit(1)
+//      }
+//  }
+//
 package vaultutil
