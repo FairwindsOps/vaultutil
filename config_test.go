@@ -48,3 +48,54 @@ func TestExpired(t *testing.T) {
 		})
 	}
 }
+
+func TestNewConfig(t *testing.T) {
+	type args struct {
+		partition string
+		role      string
+		path      string
+		buffer    int64
+	}
+	tests := []struct {
+		name string
+		args args
+		want *Config
+	}{
+		{
+			name: "basic gov",
+			args: args{
+				partition: "gov",
+				path:      "someone",
+				role:      "arole",
+				buffer:    30,
+			},
+			want: &Config{
+				AWSBaseURL:    "amazonaws-us-gov.com",
+				Path:          "someone",
+				Role:          "arole",
+				BufferSeconds: 30,
+			},
+		},
+		{
+			name: "basic commercial",
+			args: args{
+				partition: "aws",
+				path:      "someone",
+				role:      "arole",
+				buffer:    30,
+			},
+			want: &Config{
+				AWSBaseURL:    "aws.amazon.com",
+				Path:          "someone",
+				Role:          "arole",
+				BufferSeconds: 30,
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := NewConfig(tt.args.partition, tt.args.role, tt.args.path, tt.args.buffer)
+			assert.EqualValues(t, tt.want, got)
+		})
+	}
+}
