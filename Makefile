@@ -3,13 +3,10 @@ GOCMD=GO111MODULE=on go
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
-BINARY_NAME=pluto
-COMMIT := $(shell git rev-parse HEAD)
-VERSION := "local-dev"
 
 all: lint test
 build:
-	$(GOBUILD) -o $(BINARY_NAME) -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -s -w" -v
+	$(GOBUILD) -v
 lint:
 	golangci-lint run
 reportcard:
