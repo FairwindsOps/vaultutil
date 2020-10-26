@@ -124,3 +124,36 @@ func TestAWSCredentials_buildEnv(t *testing.T) {
 		})
 	}
 }
+
+func TestAWSCredentials_Expired(t *testing.T) {
+	type fields struct {
+		Created  time.Time
+		Duration int64
+	}
+
+	tests := []struct {
+		name   string
+		fields fields
+		buffer int64
+		want   bool
+	}{
+		{
+			name: "not expired",
+			fields: fields{
+				Created:  time.Now(),
+				Duration: 100,
+			},
+			buffer: 10,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			a := &AWSCredentials{
+				Created:  tt.fields.Created,
+				Duration: tt.fields.Duration,
+			}
+			got := a.Expired(tt.buffer)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
