@@ -1,0 +1,44 @@
+version: 2.1
+
+jobs:
+  release:
+    docker:
+      - image: cimg/go:1.15
+    steps:
+      - checkout
+      - run: curl -sL https://git.io/goreleaser | bash
+  test:
+    docker:
+      - image: cimg/go:1.15
+    steps:
+      - checkout
+      - run:
+          name: golangci-lint
+          command: |
+            curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.32.0
+            golangci-lint run -v
+      - run:
+          name: go test
+          command: |
+            make test
+            bash <(curl -s https://codecov.io/bash)
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*(-.*)*/
+      - release:
+          requires:
+          - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*(-.*)*/
+
