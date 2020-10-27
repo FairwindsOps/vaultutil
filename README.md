@@ -1,6 +1,9 @@
 # vaultutil
 
-[![GitHub release (latest SemVer)][release-image]][release-link] [![GitHub go.mod Go version][version-image]][version-link] [![CircleCI][circleci-image]][circleci-link] [![Code Coverage][codecov-image]][codecov-link] [![Go Report Card][goreport-image]][goreport-link]
+[![PkgGoDev][doc-image]][doc-link] [![GitHub release (latest SemVer)][release-image]][release-link] [![GitHub go.mod Go version][version-image]][version-link] [![CircleCI][circleci-image]][circleci-link] [![Code Coverage][codecov-image]][codecov-link] [![Go Report Card][goreport-image]][goreport-link]
+
+[doc-image]: https://pkg.go.dev/badge/fairwindsops/vaultutil
+[doc-link]: https://pkg.go.dev/github.com/fairwindsops/vaultutil
 
 [version-image]: https://img.shields.io/github/go-mod/go-version/FairwindsOps/vaultutil
 [version-link]: https://github.com/FairwindsOps/vaultutil
