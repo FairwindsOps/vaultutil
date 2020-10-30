@@ -35,7 +35,7 @@ type Token struct {
 
 // CheckToken makes sure we have a valid token
 func CheckToken() error {
-	data, _, err := Exec("vault", "token", "lookup", "-format=json")
+	data, _, err := execute("vault", "token", "lookup", "-format=json")
 	if err != nil {
 		return err
 	}
@@ -52,18 +52,27 @@ func CheckToken() error {
 	return nil
 }
 
-// revokeLease revokes a vault lease.
-// Utilized by individual credential Revoke() functions
-func revokeLease(leaseID string) error {
-	_, _, err := Exec("vault", "lease", "revoke", leaseID)
+// Login initiates a vault login with the provided method
+func Login(loginMethod string) error {
+	_, _, err := executeInteractive(true, true, "vault", "login", "-method", loginMethod)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-// Exec returns the output and error of a command run using inventory environment variables.
-func Exec(name string, arg ...string) ([]byte, string, error) {
+// revokeLease revokes a vault lease.
+// Utilized by individual credential Revoke() functions
+func revokeLease(leaseID string) error {
+	_, _, err := execute("vault", "lease", "revoke", leaseID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// exec returns the output and error of a command run using inventory environment variables.
+func execute(name string, arg ...string) ([]byte, string, error) {
 	cmd := exec.Command(name, arg...)
 	data, err := cmd.CombinedOutput()
 	output := strings.TrimSpace(string(data))
@@ -74,9 +83,9 @@ func Exec(name string, arg ...string) ([]byte, string, error) {
 	return data, output, nil
 }
 
-// ExecInteractive works like exec, but allows interactivity with the command
+// executeInteractive works like exec, but allows interactivity with the command
 // https://blog.kowalczyk.info/article/wOYk/advanced-command-execution-in-go-with-osexec.html
-func ExecInteractive(showStdErr bool, showStdOut bool, name string, arg ...string) ([]byte, string, error) {
+func executeInteractive(showStdErr bool, showStdOut bool, name string, arg ...string) ([]byte, string, error) {
 
 	cmd := exec.Command(name, arg...)
 
