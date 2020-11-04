@@ -71,7 +71,7 @@ func revokeLease(leaseID string) error {
 	return nil
 }
 
-// exec returns the output and error of a command run using inventory environment variables.
+// execute returns the output and error of a command run using inventory environment variables.
 func execute(name string, arg ...string) ([]byte, string, error) {
 	cmd := exec.Command(name, arg...)
 	data, err := cmd.CombinedOutput()
