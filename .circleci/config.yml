@@ -21,7 +21,6 @@ jobs:
           name: go test
           command: |
             make test
-            bash <(curl -s https://codecov.io/bash)
 
 workflows:
   version: 2

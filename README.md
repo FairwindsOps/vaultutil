@@ -1,6 +1,6 @@
 # vaultutil
 
-[![PkgGoDev][doc-image]][doc-link] [![GitHub release (latest SemVer)][release-image]][release-link] [![GitHub go.mod Go version][version-image]][version-link] [![CircleCI][circleci-image]][circleci-link] [![Code Coverage][codecov-image]][codecov-link] [![Go Report Card][goreport-image]][goreport-link]
+[![PkgGoDev][doc-image]][doc-link] [![GitHub release (latest SemVer)][release-image]][release-link] [![GitHub go.mod Go version][version-image]][version-link] [![CircleCI][circleci-image]][circleci-link] [![Go Report Card][goreport-image]][goreport-link]
 
 [doc-image]: https://pkg.go.dev/badge/fairwindsops/vaultutil
 [doc-link]: https://pkg.go.dev/github.com/fairwindsops/vaultutil
@@ -16,9 +16,6 @@
 
 [circleci-image]: https://circleci.com/gh/FairwindsOps/vaultutil/tree/master.svg?style=svg
 [circleci-link]: https://circleci.com/gh/FairwindsOps/vaultutil
-
-[codecov-image]: https://codecov.io/gh/FairwindsOps/vaultutil/branch/master/graph/badge.svg
-[codecov-link]: https://codecov.io/gh/FairwindsOps/vaultutil
 
 This library provides utilities for utilizing Vault in various user workflows and environments.
 
