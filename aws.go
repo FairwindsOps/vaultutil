@@ -287,7 +287,11 @@ func (c Config) getAWSCredentials() (*AWSCredentials, error) {
 func (c Config) AWSLogin() (*AWSCredentials, error) {
 	endpoint := fmt.Sprintf("%s/sts/%s", c.Path, c.Role)
 	klog.V(3).Infof("attempting to get aws credentials from vault at %s", endpoint)
+
 	cmd := exec.Command("vault", "write", endpoint, "-format=json")
+	if c.TTL != "" {
+		cmd.Args = append(cmd.Args, fmt.Sprintf("-ttl=%s", c.TTL))
+	}
 
 	data, err := cmd.CombinedOutput()
 	if err != nil {

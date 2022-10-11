@@ -30,6 +30,7 @@ type Config struct {
 	AWSBaseURL string
 	Path       string
 	Role       string
+	TTL        string
 	// BufferSeconds is the number of seconds to renew before expiration
 	BufferSeconds int64
 }
