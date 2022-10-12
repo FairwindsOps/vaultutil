@@ -290,7 +290,7 @@ func (c Config) AWSLogin() (*AWSCredentials, error) {
 
 	cmd := exec.Command("vault", "write", endpoint, "-format=json")
 	if c.TTL != "" {
-		cmd.Args = append(cmd.Args, fmt.Sprintf("-ttl=%s", c.TTL))
+		cmd.Args = append(cmd.Args, fmt.Sprintf("-sts_ttl=%s", c.TTL))
 	}
 
 	data, err := cmd.CombinedOutput()
