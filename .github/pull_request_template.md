@@ -1,4 +1,5 @@
-This PR fixes issue #
+
+This PR fixes #
 
 ## Checklist
 * [ ] I have signed the CLA
