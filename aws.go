@@ -264,7 +264,13 @@ func (c Config) generateSigninURL(token *string) (string, error) {
 // This function only returns the access key, secret key and token.
 // Used by the aws-console to build JSON for generating links
 func (c Config) getAWSCredentials() (*AWSCredentials, error) {
-	creds := credentials.NewEnvCredentials()
+	creds := &credentials.Credentials{}
+
+	if os.Getenv("AWS_SHARED_CREDENTIALS_FILE") != "" && os.Getenv("AWS_PROFILE") != "" {
+		creds = credentials.NewSharedCredentials(os.Getenv("AWS_SHARED_CREDENTIALS_FILE"), os.Getenv("AWS_PROFILE"))
+	} else {
+		creds = credentials.NewEnvCredentials()
+	}
 
 	// Retrieve the credentials value
 	credValue, err := creds.Get()
